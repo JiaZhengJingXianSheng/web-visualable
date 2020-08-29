@@ -1,0 +1,309 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "微软雅黑";
+    font-size: .15rem;
+    box-sizing: border-box;
+}
+
+dd,
+dl,
+dt,
+em,
+i,
+p,
+textarea,
+a,
+div {
+    padding: 0px;
+    margin: 0px;
+}
+
+ul,
+li {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+}
+
+:root {
+    z-index: -1;
+}
+
+.clearfix:after,
+.clearfix:before {
+    content: "";
+    display: table
+}
+
+.clearfix:after {
+    clear: both;
+    overflow: hidden
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    color: #000;
+    background: #000c3b;
+}
+
+header {
+    position: relative;
+    height: 1.25rem;
+    background: url(../images/head_bg.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+header h1 {
+    font-size: 0.485rem;
+    color: white;
+    text-align: center;
+    line-height: 1rem;
+}
+
+header .showTime {
+    position: absolute;
+    right: .375rem;
+    line-height: .9375rem;
+    top: 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.25rem;
+}
+
+
+/*主体*/
+
+.zhuti {
+    width: 96%;
+    margin: 0 auto;
+    overflow: hidden;
+    padding-top: .375rem;
+}
+
+.left_fl {
+    float: left;
+    width: 30%;
+}
+
+.data-box1-fl {
+    border: 2px solid #032d60;
+    -webkit-box-shadow: #07417a 0 0 10px;
+    -moz-box-shadow: #07417a 0 0 10px;
+    box-shadow: inset 0 0 30px #07417a;
+    position: relative
+}
+
+
+/*四个角*/
+
+.topl {
+    width: 20px;
+    height: 20px;
+    border-top-width: 2px;
+    border-top-color: #26c6f0;
+    border-top-style: solid;
+    border-left-width: 2px;
+    border-left-color: #26c6f0;
+    border-left-style: solid;
+    position: absolute;
+    top: -2px;
+    left: -2px
+}
+
+.topr {
+    width: 20px;
+    height: 20px;
+    border-top-width: 2px;
+    border-top-color: #26c6f0;
+    border-top-style: solid;
+    border-right-width: 2px;
+    border-right-color: #26c6f0;
+    border-right-style: solid;
+    position: absolute;
+    top: -2px;
+    right: -2px
+}
+
+.bottoml {
+    width: 20px;
+    height: 20px;
+    border-bottom-width: 2px;
+    border-bottom-color: #26c6f0;
+    border-bottom-style: solid;
+    border-left-width: 2px;
+    border-left-color: #26c6f0;
+    border-left-style: solid;
+    position: absolute;
+    bottom: -2px;
+    left: -2px
+}
+
+.bottomr {
+    width: 20px;
+    height: 20px;
+    border-bottom-width: 2px;
+    border-bottom-color: #26c6f0;
+    border-bottom-style: solid;
+    border-right-width: 2px;
+    border-right-color: #26c6f0;
+    border-right-style: solid;
+    position: absolute;
+    bottom: -2px;
+    right: -2px
+}
+
+
+/*小标题*/
+
+.data-title-left,
+.data-title-right {
+    color: #105eda;
+    font-family: "微软雅黑";
+    font-size: .25rem
+}
+
+.data-title {
+    background-color: #000c3b;
+    width: 178px;
+    margin: -18px auto 0 auto;
+    color: #83c7e3;
+    font-size: 20px;
+}
+
+.data-title span {
+    text-align: center;
+    width: 150px;
+    display: inline-block;
+    text-align: center;
+    font-size: 18px;
+}
+
+
+/*项目展示*/
+
+.xmzs {
+    width: 100vw;
+    color: #fff;
+    padding: .25rem 0;
+}
+
+.xm_list {
+    font-size: .25rem;
+    padding: .125rem .125rem .125rem .125rem;
+}
+
+.xm_list li {
+    line-height: .4rem;
+    overflow: hidden;
+    font-size: .2rem;
+    padding: 0rem .25rem;
+}
+
+
+/*信息展示*/
+
+.mtop {
+    margin-top: .5rem;
+}
+
+.ylsyzt {
+    width: 100%;
+    color: #fff;
+    padding-top: .25rem 0;
+}
+
+.ylsy {
+    width: 1.25rem;
+    float: left;
+    height: 1.25rem;
+}
+
+#mfs {
+    margin-left: 0.25rem;
+    padding: 10px;
+    clear: both;
+    font-size: 14px;
+    display: block;
+    color: #fff
+}
+
+.mfs_chart {
+    margin-left: 0.4rem;
+}
+
+#cp {
+    margin-left: 0.25rem;
+    padding: 10px;
+    clear: both;
+    font-size: 14px;
+    display: block;
+    border-top: 1px #032d60 solid;
+    color: #fff
+}
+
+.cp_chart {
+    margin-left: 0.4rem;
+}
+
+#info {
+    margin-left: 0.25rem;
+    padding: 10px;
+    clear: both;
+    font-size: 14px;
+    display: block;
+    border-top: 1px #032d60 solid;
+    color: #fff
+}
+
+#device {
+    position: relative;
+    margin: 0rem .7rem;
+    width: 5rem;
+    height: 5rem;
+}
+
+
+/* 仪表盘 */
+
+.right {
+    float: right;
+    width: 20%;
+}
+
+.show {
+    border: 2px solid #032d60;
+    -webkit-box-shadow: #07417a 0 0 10px;
+    -moz-box-shadow: #07417a 0 0 10px;
+    box-shadow: inset 0 0 30px #07417a;
+    position: relative
+}
+
+#show_f,
+#show_s,
+#show_t {
+    position: relative;
+    margin: 0rem .7rem;
+    width: 3rem;
+    height: 3rem;
+}
+
+#sts_f {
+    margin-left: 0.25rem;
+    padding: 10px;
+    clear: both;
+    font-size: 14px;
+    display: block;
+    color: #fff
+}
+
+#sts_s,
+#sts_t {
+    margin-left: 0.25rem;
+    padding: 10px;
+    clear: both;
+    font-size: 14px;
+    display: block;
+    border-top: 1px #032d60 solid;
+    color: #fff
+}

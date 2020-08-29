@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Web可视化-沥青搅拌站</title>
+    <link rel="stylesheet" href="css/index.css" />
+    <script src="js/echarts.min.js"></script>
+    <script src="js/flexible.js"></script>
+    <script src="https://evercraft.co/api/everapi.js"></script>
+</head>
+
+<body>
+    <!--标头-->
+    <header>
+        <h1>
+            Web可视化-沥青搅拌站
+        </h1>
+
+        <div id="root" style=" height: 1000px;"></div>
+        <script>
+            // EverAPI 配置
+            const config = {
+                lang: 'zh',
+                progress: {
+                    useDefaultProgress: true,
+                    onProgress: function(progress) {},
+                    onRendered: function(volume, area, box) {},
+                },
+                background: {
+                    color: '#000c3b',
+                    opacity: 1,
+                },
+                toolbar: {
+                    visible: false,
+                },
+
+                annotation: {
+                    enabled: true,
+                    hasDialog: true,
+                    callbacks: {
+                        onAdd: (data) => {},
+                        onRemove: (data) => {},
+                        onUpdate: (data) => {}
+                    }
+                }
+            }
+
+
+            let apiLoaded = false
+
+
+            const api = new EverAPI('6103ec4a2189', 'cc239b39cd09383aba9b1310db8cf334', config)
+                /*const anno = document.querySelector("#anno")
+                let enableAnno = false
+                anno.addEventListener("click", () => {
+                    if (apiLoaded) {
+                        const data = {
+
+                        }
+                        api.initAnno3DPins('root', data)
+                    }
+                })*/
+
+            window.addEventListener('oneverapiloaded', () => {
+
+
+                const files = [{
+                    filename: 'Model.obj',
+                    url: 'obj/Model.obj',
+                    mtl: 'obj/Model.mtl'
+                }, ]
+
+                loadApi(files)
+            })
+
+
+            function loadApi(files) {
+
+                api.render('root', files)
+                apiLoaded = true
+            }
+        </script>
+
+        <div class="showTime"></div>
+        <script>
+            var t = null;
+            t = setTimeout(time, 1000);
+
+            function time() {
+                clearTimeout(t);
+                dt = new Date();
+                var y = dt.getFullYear();
+                var mt = dt.getMonth() + 1;
+                var day = dt.getDate();
+                var h = dt.getHours(); //时
+                var m = dt.getMinutes(); //分
+                var s = dt.getSeconds(); //秒
+                document.querySelector(".showTime").innerHTML =
+                    "当前时间：" +
+                    y +
+                    "年" +
+                    mt +
+                    "月" +
+                    day +
+                    "-" +
+                    h +
+                    "时" +
+                    m +
+                    "分" +
+                    s +
+                    "秒";
+                t = setTimeout(time, 1000);
+            }
+        </script>
+
+    </header>
+
+    <!--页面主体-->
+    <section class="zhuti">
+        <div class="left_fl">
+            <!--已有情况-->
+            <div class="data-box1-fl">
+                <i class="topl"></i>
+                <i class="topr"></i>
+                <i class="bottoml"></i>
+                <i class="bottomr"></i>
+                <div class="data-title">
+                    <b class="data-title-left fl">[</b>
+                    <span>项目展示</span>
+                    <b class="data-tltle-right fr">]</b>
+                </div>
+                <!--项目展示-->
+                <div class="xmzs">
+                    <div id="xmzs_cen">
+                        <ul class="xm_list">
+                            <li>所属公司：XX公司 </li>
+                            <li>占地面积：XX平米</li>
+                            <li>主要产品：沥青</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--原料剩余-->
+            <div class="data-box1-fl mtop">
+                <i class="topl"></i>
+                <i class="topr"></i>
+                <i class="bottoml"></i>
+                <i class="bottomr"></i>
+                <div class="data-title">
+                    <b class="data-title-left fl">[</b>
+                    <span>工厂信息状态</span>
+                    <b class="data-title-right fr">]</b>
+                </div>
+                <!--原料剩余状态-->
+                <div class="ylsyzt">
+
+
+                    <div id="mfs">余料展示</div>
+
+                    <div id="mfs_chart" class="mfs_chart" style="height:163px"></div>
+                    <script type="text/javascript">
+                        var dom = document.getElementById("mfs_chart");
+                        var myChart = echarts.init(dom);
+                        var app = {};
+                        option = null;
+                        app.title = '环形图';
+
+                        option = {
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b}: {c} ({d}%)"
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                x: 'left',
+                                data: ['物料A', '物料B', '物料C', '物料D', '物料E'],
+                                textStyle: {
+                                    color: '#fff',
+                                },
+                            },
+                            series: [{
+                                name: '访问来源',
+                                type: 'pie',
+                                radius: ['50%', '70%'],
+                                avoidLabelOverlap: false,
+                                label: {
+                                    normal: {
+                                        show: false,
+                                        textStyle: {
+                                            align: 'center',
+                                            baseline: 'middle',
+                                            fontFamily: '微软雅黑',
+                                            fontSize: 12,
+                                            fontWeight: 'normal'
+                                        }
+
+                                    },
+                                    emphasis: {
+                                        show: true,
+                                        textStyle: {
+                                            fontSize: '12',
+                                            fontWeight: 'bold'
+                                        }
+                                    }
+                                },
+                                labelLine: {
+                                    normal: {
+                                        show: false
+                                    }
+                                },
+                                data: [{
+                                    value: 335,
+                                    name: '物料A'
+                                }, {
+                                    value: 710,
+                                    name: '物料B'
+                                }, {
+                                    value: 834,
+                                    name: '物料C'
+                                }, {
+                                    value: 1135,
+                                    name: '物料D'
+                                }, {
+                                    value: 1548,
+                                    name: '物料E'
+                                }]
+                            }]
+                        };;
+                        if (option && typeof option === "object") {
+                            myChart.setOption(option, true);
+                        }
+                    </script>
+                    <!-- 产品信息 -->
+                    <div id="cp">产品信息</div>
+                    <div id="cp_chart" class="cp_chart" style="height:163px"></div>
+                    <script type="text/javascript">
+                        var dom = document.getElementById("cp_chart");
+                        var myChart = echarts.init(dom);
+                        var app = {};
+                        option = null;
+                        app.title = '环形图';
+
+                        option = {
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b}: {c} ({d}%)"
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                x: 'left',
+                                data: ['产品A', '产品B', '产品C'],
+                                textStyle: {
+                                    color: '#fff',
+                                },
+                            },
+                            series: [{
+                                name: '访问来源',
+                                type: 'pie',
+                                radius: ['50%', '70%'],
+                                avoidLabelOverlap: false,
+                                label: {
+                                    normal: {
+                                        show: false,
+                                        textStyle: {
+                                            align: 'center',
+                                            baseline: 'middle',
+                                            fontFamily: '微软雅黑',
+                                            fontSize: 12,
+                                            fontWeight: 'normal'
+                                        }
+
+                                    },
+                                    emphasis: {
+                                        show: true,
+                                        textStyle: {
+                                            fontSize: '12',
+                                            fontWeight: 'bold'
+                                        }
+                                    }
+                                },
+                                labelLine: {
+                                    normal: {
+                                        show: false
+                                    }
+                                },
+                                data: [{
+                                        value: 335,
+                                        name: '产品A'
+                                    }, {
+                                        value: 710,
+                                        name: '产品B'
+                                    }, {
+                                        value: 834,
+                                        name: '产品C'
+                                    },
+
+                                ]
+                            }]
+                        };;
+                        if (option && typeof option === "object") {
+                            myChart.setOption(option, true);
+                        }
+                    </script>
+                    <!--各处信息-->
+                    <div id="info">设备温度信息</div>
+                    <div id="device" ,style="height:200px"></div>
+                    <script type="text/javascript">
+                        var dom2 = document.getElementById("device");
+                        var myChart2 = echarts.init(dom2);
+                        var app2 = {};
+                        option2 = null;
+                        option2 = {
+                            title: {
+                                text: '设备',
+                                show: false,
+                                textStyle: {
+                                    color: 'rgba(221,221,221,1)', //标题颜色
+                                    fontSize: 12,
+                                    lineHeight: 20,
+                                },
+
+
+                            },
+                            tooltip: {},
+                            legend: {
+                                data: []
+                            },
+                            radar: {
+                                name: {
+                                    textStyle: {
+                                        color: '#fff',
+                                        backgroundColor: '#333',
+                                        borderRadius: 3,
+                                        padding: [3, 5]
+                                    },
+                                },
+                                // 设置雷达图中间射线的颜色
+                                axisLine: {
+                                    lineStyle: {
+                                        color: 'rgba(131,141,158,.1)',
+                                    },
+                                },
+                                indicator: [
+
+                                    {
+                                        name: '一号',
+                                        max: 2000
+                                    }, {
+                                        name: '二号',
+                                        max: 2000
+                                    }, {
+                                        name: '三号',
+                                        max: 2000
+                                    }, {
+                                        name: '四号',
+                                        max: 2000
+                                    }, {
+                                        name: '五号',
+                                        max: 2000
+                                    }
+                                ],
+
+                                splitArea: {
+                                    show: true,
+                                    areaStyle: {
+                                        color: 'rgba(0,0,0,0)',
+                                    },
+                                },
+
+
+                            },
+                            series: [{
+                                name: '设备温度',
+                                type: 'radar', //雷达图
+
+                                data: [{
+                                        value: [985, 824, 1535, 1255, 1950],
+                                        name: '设备温度',
+
+                                        itemStyle: {
+                                            normal: {
+                                                color: '#009991',
+                                                lineStyle: {
+                                                    color: 'rgba(3,78,80,.3)',
+                                                },
+                                            },
+                                        },
+                                    },
+
+                                ]
+                            }]
+                        };;
+                        if (option2 && typeof option2 === "object") {
+                            myChart2.setOption(option2, true);
+                        }
+                    </script>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="show">
+                <i class="topl"></i>
+                <i class="topr"></i>
+                <i class="bottoml"></i>
+                <i class="bottomr"></i>
+                <div class="data-title">
+                    <b class="data-title-left fl">[</b>
+                    <span>炉内压力</span>
+                    <b class="data-tltle-right fr">]</b>
+                </div>
+
+                <div id="sts_f">一号炉</div>
+                <div id="show_f"></div>
+
+                <script type="text/javascript">
+                    var dom = document.getElementById("show_f");
+                    var myChart = echarts.init(dom);
+                    var app = {};
+                    option = null;
+                    option = {
+                        tooltip: {
+                            formatter: '{a} <br/>{b} : {c}%'
+                        },
+
+                        series: [{
+
+                            type: 'gauge',
+                            detail: {
+                                formatter: '{value}KPa'
+                            },
+                            data: [{
+                                value: 51.9,
+
+                            }]
+                        }]
+                    };
+
+                    setInterval(function() {
+                        option.series[0].data[0].value = ((Math.random() * 10) + 50).toFixed(2) - 0;
+                        myChart.setOption(option, true);
+                    }, 2000);;
+                    if (option && typeof option === "object") {
+                        myChart.setOption(option, true);
+                    }
+                </script>
+                <div id="sts_s">二号炉</div>
+                <div id="show_s"></div>
+
+                <script type="text/javascript">
+                    var dom = document.getElementById("show_s");
+                    var myChart = echarts.init(dom);
+                    var app = {};
+                    option = null;
+                    option = {
+                        tooltip: {
+                            formatter: '{a} <br/>{b} : {c}%'
+                        },
+
+                        series: [{
+
+                            type: 'gauge',
+                            detail: {
+                                formatter: '{value}KPa'
+                            },
+                            data: [{
+                                value: 66.3,
+
+                            }]
+                        }]
+                    };
+
+                    setInterval(function() {
+                        option.series[0].data[0].value = ((Math.random() * 10) + 60).toFixed(2) - 0;
+                        myChart.setOption(option, true);
+                    }, 2000);;
+                    if (option && typeof option === "object") {
+                        myChart.setOption(option, true);
+                    }
+                </script>
+                <div id="sts_t">三号炉</div>
+                <div id="show_t"></div>
+
+                <script type="text/javascript">
+                    var dom = document.getElementById("show_t");
+                    var myChart = echarts.init(dom);
+                    var app = {};
+                    option = null;
+                    option = {
+                        tooltip: {
+                            formatter: '{a} <br/>{b} : {c}%'
+                        },
+
+                        series: [{
+
+                            type: 'gauge',
+                            detail: {
+                                formatter: '{value}KPa'
+                            },
+                            data: [{
+                                value: 70,
+
+                            }]
+                        }]
+                    };
+
+                    setInterval(function() {
+                        option.series[0].data[0].value = ((Math.random() * 10) + 70).toFixed(2) - 0;
+                        myChart.setOption(option, true);
+                    }, 2000);;
+                    if (option && typeof option === "object") {
+                        myChart.setOption(option, true);
+                    }
+                </script>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
